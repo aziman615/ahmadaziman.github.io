@@ -1,0 +1,215 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 40px 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+header p {
+    font-size: 1.2em;
+}
+
+.intro {
+    font-style: italic;
+}
+
+.cityscape {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; /* Center buildings vertically */
+    height: 350px; /* Reduced height to bring buildings closer to road */
+    background: linear-gradient(to bottom, #87CEEB 0%, #f4f4f4 100%); /* Sky background */
+    position: relative;
+    overflow: hidden;
+    padding: 20px 20px 80px; /* Adjusted padding to position road closer */
+}
+
+.building {
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    width: 150px;
+    position: relative;
+    margin-bottom: 0; /* Removed margin to rely on flex centering */
+}
+
+.building:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.2); /* Light hover effect */
+}
+
+.building:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.building-emoji {
+    display: block;
+    font-size: 100px;
+    line-height: 1;
+    transition: transform 0.3s;
+}
+
+.building-name {
+    display: block;
+    font-weight: bold;
+    color: #003366;
+    margin-top: 5px;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #003366;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.cloud {
+    position: absolute;
+    font-size: 50px;
+    top: var(--top);
+    left: -10%;
+    animation: move-cloud var(--delay) linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes move-cloud {
+    0% { left: -10%; }
+    100% { left: 110%; }
+}
+
+.road {
+    position: absolute;
+    bottom: 30px; /* Moved road closer to buildings */
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #808080; /* Gray road */
+    background-image: repeating-linear-gradient(90deg, #808080, #808080 20px, #FFFF00 20px, #FFFF00 25px); /* Yellow dashed lines */
+    background-size: 50px 100%;
+    animation: road-move 2s linear infinite;
+}
+
+@keyframes road-move {
+    0% { background-position: 0 0; }
+    100% { background-position: -50px 0; }
+}
+
+.car {
+    position: absolute;
+    bottom: 35px; /* Adjusted to stay above road */
+    left: 0;
+    font-size: 50px;
+    transform: scaleX(-1); /* Mirror effect */
+    transition: left 1s ease-in-out;
+    animation: car-bounce 1s infinite;
+}
+
+@keyframes car-bounce {
+    0%, 100% { transform: scaleX(-1) translateY(0); }
+    50% { transform: scaleX(-1) translateY(-5px); }
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 800px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+h2 {
+    text-align: center;
+    color: #003366;
+}
+
+.skills-list, ul {
+    list-style: disc;
+    padding-left: 20px;
+}
+
+.exp-item, .proj-item, .edu-item {
+    margin-bottom: 30px;
+}
+
+.exp-item h3, .proj-item h3, .edu-item h3 {
+    margin-bottom: 5px;
+}
+
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .cityscape {
+        flex-wrap: wrap;
+        height: auto;
+    }
+    .building {
+        margin: 20px;
+    }
+}

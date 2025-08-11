@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmad Aziman bin Azlan - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Ahmad Aziman bin Azlan</h1>
+            <p>Computer Science Graduate | Web Developer | PHP, Laravel & Machine Learning Enthusiast</p>
+            <p class="intro">Welcome to my Career City! Hover or click on a building to explore my portfolio.</p>
+        </div>
+    </header>
+
+    <section class="cityscape">
+        <div class="cloud" style="--top: 10%; --delay: 10s">☁️</div>
+        <div class="cloud" style="--top: 20%; --delay: 15s">☁️</div>
+        <div class="cloud" style="--top: 15%; --delay: 20s">☁️</div>
+        <div class="building" data-section="about">
+            <span class="building-emoji">🏢</span>
+            <span class="building-name">About Me</span>
+            <span class="tooltip">Click to explore!</span>
+        </div>
+        <div class="building" data-section="skills">
+            <span class="building-emoji">🌆</span>
+            <span class="building-name">Skills</span>
+            <span class="tooltip">Click to explore!</span>
+        </div>
+        <div class="building" data-section="experience">
+            <span class="building-emoji">🏭</span>
+            <span class="building-name">Experience</span>
+            <span class="tooltip">Click to explore!</span>
+        </div>
+        <div class="building" data-section="projects">
+            <span class="building-emoji">🚧</span>
+            <span class="building-name">Projects</span>
+            <span class="tooltip">Click to explore!</span>
+        </div>
+        <div class="building" data-section="education">
+            <span class="building-emoji">🏫</span>
+            <span class="building-name">Education</span>
+            <span class="tooltip">Click to explore!</span>
+        </div>
+        <div class="building" data-section="contact">
+            <span class="building-emoji">🏛️</span>
+            <span class="building-name">Contact</span>
+            <span class="tooltip">Click to explore!</span>
+        </div>
+        <div class="road">
+            <span class="car">🚗</span>
+        </div>
+    </section>
+
+    <!-- Modals for each section -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Hidden content sections (used to populate modals) -->
+    <div id="about-content" class="hidden">
+        <h2>About Me 🏢</h2>
+        <p>I’m a driven Computer Science graduate eager to learn and grow in software development. With hands-on experience in PHP, Laravel, MySQL, and Python, I’ve built web portals, integrated APIs, and created user-friendly documentation for e-learning platforms like IUCeL 2025. My background in field and office settings, including inventory management and process optimization, has honed my problem-solving and collaboration skills.</p>
+        <p>Flexible and detail-oriented, I thrive in team environments and am passionate about boosting productivity through innovative tech solutions. I’m seeking internship or entry-level roles at forward-thinking companies where I can contribute and make an impact.</p>
+    </div>
+
+    <div id="skills-content" class="hidden">
+        <h2>Skills 🌆</h2>
+        <ul>
+            <li>Programming Languages & Frameworks: PHP, Laravel, Python, HTML, CSS, JavaScript</li>
+            <li>Databases & Tools: MySQL, HeidiSQL, phpMyAdmin</li>
+            <li>Development Environments: Visual Studio Code, Laragon, Google Colab</li>
+            <li>Other Technologies: API Integration, DataTables, Select2, Canva, YOLOv8</li>
+            <li>Soft Skills: Problem-Solving, Team Collaboration, Adaptability, Time Management, Data Analysis (Excel), Process Optimization</li>
+            <li>Language Proficiency: Bahasa Malaysia (Native), English (Intermediate)</li>
+        </ul>
+    </div>
+
+    <div id="experience-content" class="hidden">
+        <h2>Professional Experience 🏭</h2>
+        <div class="exp-item">
+            <h3>Web Development Intern - Centre for Open and Distance Learning (CODL), Universiti Teknikal Malaysia Melaka</h3>
+            <p>March 2025 – June 2025 | Melaka, Malaysia</p>
+            <ul>
+                <li>Developed features for the IUCeL 2025 portal using PHP, Laravel, and MySQL, including role-based access.</li>
+                <li>Implemented registration forms, article submissions, and payment systems with CAPTCHA.</li>
+                <li>Integrated third-party payment API and managed databases via HeidiSQL.</li>
+                <li>Created user manuals with Canva, reducing support queries.</li>
+            </ul>
+        </div>
+        <div class="exp-item">
+            <h3>Web Developer Intern - Aerodyne Geospatial Sdn Bhd</h3>
+            <p>July 2019 – September 2019 | Malaysia</p>
+            <ul>
+                <li>Collaborated on scalable web applications using Laravel and SDLC methodologies.</li>
+                <li>Gathered user requirements and optimized code for performance.</li>
+            </ul>
+        </div>
+        <div class="exp-item">
+            <h3>Assistant Supervisor - Pusat Borong Matahari Sdn Bhd</h3>
+            <p>April 2022 – October 2022 | Melaka, Malaysia</p>
+            <ul>
+                <li>Optimized inventory management with data-driven strategies.</li>
+                <li>Conducted cost analysis using Excel and quality control inspections.</li>
+                <li>Improved supply chain collaboration and operational efficiency.</li>
+                <li>Generated performance reports for decision-making.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="projects-content" class="hidden">
+        <h2>Projects 🚧</h2>
+        <div class="proj-item">
+            <h3>Chili Disease and Pest Detection System (Final Year Project)</h3>
+            <ul>
+                <li>Developed a Python-based ML system using YOLOv8 on Google Colab.</li>
+                <li>Created a user-friendly dashboard for farmers.</li>
+                <li>Optimized data preprocessing for efficiency.</li>
+            </ul>
+            <!--<a href="#">View on GitHub</a>-->
+        </div>
+        <div class="proj-item">
+            <h3>IUCeL 2025 Portal Development</h3>
+            <ul>
+                <li>Built a role-based web portal with PHP/Laravel.</li>
+                <li>Integrated APIs and created manuals for categories.</li>
+            </ul>
+            <!--<a href="#">Live Demo</a>-->
+        </div>
+    </div>
+
+    <div id="education-content" class="hidden">
+        <h2>Education 🏫</h2>
+        <div class="edu-item">
+            <h3>Bachelor of Science (Hons.) in Computer Science</h3>
+            <p>Universiti Teknologi MARA, Kampus Jasin | 2022 – 2025</p>
+            <p>Relevant Coursework: Web Development, Database Systems, Software Engineering, Machine Learning</p>
+        </div>
+        <div class="edu-item">
+            <h3>Diploma in Computer Science</h3>
+            <p>Universiti Teknologi MARA, Kampus Jasin | 2017 – 2020</p>
+        </div>
+    </div>
+
+    <div id="contact-content" class="hidden">
+        <h2>Contact 🏛️</h2>
+        <p>Email: aziman605@gmail.com</p>
+        <p>Phone: 01157179984</p>
+        <p>LinkedIn: linkedin.com/in/ahmad-aziman-7080b0348</p>
+        <p>Location: Jasin, Melaka</p>
+        <p>Additional: Driving License (B2, D), Own Transport</p>
+    </div>
+
+    <footer>
+        <p>© 2025 Ahmad Aziman bin Azlan. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
