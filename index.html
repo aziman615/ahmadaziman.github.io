@@ -76,7 +76,6 @@
         #skills .swiper-slide { display: flex; justify-content: center; align-items: center; }
         #skills .flip-card { perspective: 1000px; width: 200px; height: 250px; cursor: pointer; }
         #skills .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); }
-        #skills .flip-card.tapped .flip-card-inner { transform: rotateY(180deg); }
         #skills .flip-card.tapped .flip-card-inner, #skills .flip-card:hover .flip-card-inner { transform: rotateY(180deg); transition: transform 0.6s, scale 0.2s; }
         #skills .flip-card.tapped, #skills .flip-card:hover { transform: scale(1.05); }
         #skills .flip-card-front, #skills .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem; border-radius: 10px; }
@@ -655,15 +654,23 @@
             }
         });
 
-        // Touch Support for Flip Cards
+        // Flip Card Interactions
         document.querySelectorAll('.flip-card').forEach(card => {
+            // Touch support for mobile
             card.addEventListener('touchend', (e) => {
-                e.stopPropagation(); // Prevent Swiper from capturing the touch
+                e.stopPropagation();
                 card.classList.toggle('tapped');
             });
+            // Click support for non-touch devices
+            if (!('ontouchstart' in window)) {
+                card.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    card.classList.toggle('tapped');
+                });
+            }
         });
 
-        // Prevent Swiper swipe when tapping flip card
+        // Prevent Swiper swipe when interacting with flip card
         document.querySelector('.technical-slider').addEventListener('touchstart', (e) => {
             if (e.target.closest('.flip-card')) {
                 technicalSlider.allowTouchMove = false;
