@@ -658,14 +658,20 @@
         document.querySelectorAll('.flip-card').forEach(card => {
             // Touch support for mobile
             card.addEventListener('touchend', (e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 card.classList.toggle('tapped');
             });
             // Click support for non-touch devices
             if (!('ontouchstart' in window)) {
                 card.addEventListener('click', (e) => {
+                    e.preventDefault();
                     e.stopPropagation();
                     card.classList.toggle('tapped');
+                });
+                // Reset tapped state on mouseleave to avoid conflict with hover
+                card.addEventListener('mouseleave', () => {
+                    card.classList.remove('tapped');
                 });
             }
         });
