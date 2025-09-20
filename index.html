@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; transition: background-color 0.3s, color 0.3s; }
@@ -57,23 +58,28 @@
         .right::after { left: -9px; }
         .timeline-content { padding: 15px 20px; background: rgba(255,255,255,0.1); position: relative; border-radius: 5px; backdrop-filter: blur(8px); border: 1px solid rgba(139,92,246,0.2); transition: background 0.3s; }
         body.light .timeline-content { background: rgba(0,0,0,0.1); border-color: rgba(139,92,246,0.5); }
-        /* Updated Skills Section for Mobile Responsiveness */
-        #skills .skills-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
-        #skills .skill-group { text-align: center; }
-        #skills .skill-circle { position: relative; width: 120px; height: 120px; }
-        #skills .skill-circle svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
-        #skills .skill-circle circle { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dashoffset 2s ease-in-out; }
-        #skills .skill-circle .bg { stroke: rgba(255,255,255,0.1); }
-        body.light #skills .skill-circle .bg { stroke: rgba(0,0,0,0.1); }
-        #skills .skill-circle .progress { stroke: url(#gradient); stroke-dasharray: 352; stroke-dashoffset: 352; }
-        #skills .skill-percentage { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.2rem; font-weight: bold; }
-        #skills .skill-name { margin-top: 0.8rem; font-size: 1rem; }
-        #skills .personal-skills { display: flex; flex-direction: column; gap: 0.8rem; max-width: 100%; }
-        #skills .personal-skill { background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 8px; transition: transform 0.3s; }
+        /* Skills Section with Slider and Flip Cards */
+        #skills .skills-container { display: flex; flex-direction: column; gap: 2rem; }
+        #skills .technical-skills { position: relative; }
+        #skills .swiper { padding: 1rem 0; }
+        #skills .swiper-slide { display: flex; justify-content: center; align-items: center; }
+        #skills .flip-card { perspective: 1000px; width: 200px; height: 250px; }
+        #skills .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); }
+        #skills .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+        #skills .flip-card-front, #skills .flip-card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 1rem; border-radius: 10px; }
+        #skills .flip-card-front { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); }
+        body.light #skills .flip-card-front { background: rgba(0,0,0,0.1); }
+        #skills .flip-card-back { background: linear-gradient(45deg, #8B5CF6, #A78BFA); color: #fff; transform: rotateY(180deg); }
+        #skills .flip-card-icon { font-size: 3rem; margin-bottom: 1rem; }
+        #skills .flip-card-name { font-size: 1.2rem; font-weight: bold; }
+        #skills .flip-card-percentage { font-size: 1.5rem; font-weight: bold; margin-bottom: 0.5rem; }
+        #skills .flip-card-desc { font-size: 0.9rem; }
+        #skills .personal-skills { display: flex; flex-direction: column; gap: 1rem; max-width: 100%; }
+        #skills .personal-skill { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 10px; transition: transform 0.3s; text-align: center; }
         #skills .personal-skill:hover { transform: scale(1.05); }
         body.light #skills .personal-skills .personal-skill { background: rgba(0,0,0,0.05); }
-        #skills .languages { margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        #skills .language { font-size: 1rem; padding: 0.4rem 0.8rem; background: linear-gradient(45deg, #8B5CF6, #A78BFA); border-radius: 15px; color: #fff; }
+        #skills .languages { margin-top: 2rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+        #skills .language { font-size: 1.2rem; padding: 0.5rem 1rem; background: linear-gradient(45deg, #8B5CF6, #A78BFA); border-radius: 20px; color: #fff; }
         .project-grid { display: flex; flex-direction: row; gap: 1rem; overflow-x: auto; padding: 1rem 0; }
         .project-card { background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 10px; backdrop-filter: blur(8px); border: 1px solid rgba(139,92,246,0.2); transition: transform 0.3s, background 0.3s; min-width: 250px; }
         body.light .project-card { background: rgba(0,0,0,0.1); }
@@ -110,11 +116,11 @@
             .profile-img { width: 120px; height: 120px; }
             .btn-hire { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
             #skills .skills-container { flex-direction: column; align-items: center; }
-            #skills .skill-circle { width: 100px; height: 100px; }
-            #skills .skill-circle circle { stroke-width: 6; }
-            #skills .skill-circle .progress { stroke-dasharray: 283; }
-            #skills .skill-percentage { font-size: 1rem; }
-            #skills .skill-name { font-size: 0.9rem; }
+            #skills .flip-card { width: 180px; height: 220px; }
+            #skills .flip-card-icon { font-size: 2.5rem; }
+            #skills .flip-card-name { font-size: 1rem; }
+            #skills .flip-card-percentage { font-size: 1.2rem; }
+            #skills .flip-card-desc { font-size: 0.8rem; }
             #skills .personal-skills { max-width: 100%; }
             #skills .languages { flex-direction: column; }
             .project-grid { gap: 0.8rem; }
@@ -254,66 +260,160 @@
         </div>
     </section>
 
-    <!-- Skills Section - Enhanced with Circular Progress and Icons -->
+    <!-- Skills Section - Enhanced with Slider and Flip Cards for Technical Skills -->
     <section id="skills" class="section">
         <div class="container" data-aos="fade-up">
             <h2 data-aos="fade-right">Skills</h2>
             <div class="skills-container">
-                <div class="skill-group" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="skill-circle">
-                        <svg>
-                            <defs>
-                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="#8B5CF6" />
-                                    <stop offset="100%" stop-color="#A78BFA" />
-                                </linearGradient>
-                            </defs>
-                            <circle class="bg" cx="60" cy="60" r="56" />
-                            <circle class="progress" cx="60" cy="60" r="56" style="stroke-dashoffset: calc(352 - (352 * 90) / 100);" />
-                        </svg>
-                        <div class="skill-percentage">90%</div>
+                <div class="technical-skills" data-aos="fade-up">
+                    <h3>Technical Skills</h3>
+                    <div class="swiper technical-slider">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fab fa-java flip-card-icon"></i>
+                                            <div class="flip-card-name">Java</div>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <div class="flip-card-percentage">90%</div>
+                                            <div class="flip-card-desc">Proficient in object-oriented programming and backend development.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fab fa-js flip-card-icon"></i>
+                                            <div class="flip-card-name">JavaScript</div>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <div class="flip-card-percentage">85%</div>
+                                            <div class="flip-card-desc">Experienced in frontend scripting and dynamic web features.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fab fa-python flip-card-icon"></i>
+                                            <div class="flip-card-name">Python</div>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <div class="flip-card-percentage">80%</div>
+                                            <div class="flip-card-desc">Used for data analysis, AI, and scripting.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fab fa-php flip-card-icon"></i>
+                                            <div class="flip-card-name">PHP & Laravel</div>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <div class="flip-card-percentage">75%</div>
+                                            <div class="flip-card-desc">Backend web development with frameworks.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-database flip-card-icon"></i>
+                                            <div class="flip-card-name">MySQL & Oracle</div>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <div class="flip-card-percentage">70%</div>
+                                            <div class="flip-card-desc">Database management and querying.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fab fa-android flip-card-icon"></i>
+                                            <div class="flip-card-name">Android Development</div>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <div class="flip-card-percentage">75%</div>
+                                            <div class="flip-card-desc">Mobile app development using Java/Kotlin.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-code flip-card-icon"></i>
+                                            <div class="flip-card-name">Web Development</div>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <div class="flip-card-percentage">80%</div>
+                                            <div class="flip-card-desc">HTML, CSS, PHP for full-stack web apps.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-brain flip-card-icon"></i>
+                                            <div class="flip-card-name">YOLO</div>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <div class="flip-card-percentage">70%</div>
+                                            <div class="flip-card-desc">Object detection for AI projects.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-bug flip-card-icon"></i>
+                                            <div class="flip-card-name">Software Testing</div>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <div class="flip-card-percentage">75%</div>
+                                            <div class="flip-card-desc">Ensuring software reliability.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="flip-card">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <i class="fas fa-paint-brush flip-card-icon"></i>
+                                            <div class="flip-card-name">Adobe Photoshop</div>
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <div class="flip-card-percentage">65%</div>
+                                            <div class="flip-card-desc">Graphic design and editing.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     </div>
-                    <div class="skill-name"><i class="fab fa-java"></i> Java</div>
-                </div>
-                <div class="skill-group" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="skill-circle">
-                        <svg>
-                            <circle class="bg" cx="60" cy="60" r="56" />
-                            <circle class="progress" cx="60" cy="60" r="56" style="stroke-dashoffset: calc(352 - (352 * 85) / 100);" />
-                        </svg>
-                        <div class="skill-percentage">85%</div>
-                    </div>
-                    <div class="skill-name"><i class="fab fa-js"></i> JavaScript</div>
-                </div>
-                <div class="skill-group" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="skill-circle">
-                        <svg>
-                            <circle class="bg" cx="60" cy="60" r="56" />
-                            <circle class="progress" cx="60" cy="60" r="56" style="stroke-dashoffset: calc(352 - (352 * 80) / 100);" />
-                        </svg>
-                        <div class="skill-percentage">80%</div>
-                    </div>
-                    <div class="skill-name"><i class="fab fa-python"></i> Python</div>
-                </div>
-                <div class="skill-group" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="skill-circle">
-                        <svg>
-                            <circle class="bg" cx="60" cy="60" r="56" />
-                            <circle class="progress" cx="60" cy="60" r="56" style="stroke-dashoffset: calc(352 - (352 * 75) / 100);" />
-                        </svg>
-                        <div class="skill-percentage">75%</div>
-                    </div>
-                    <div class="skill-name"><i class="fab fa-php"></i> PHP & Laravel</div>
-                </div>
-                <div class="skill-group" data-aos="zoom-in" data-aos-delay="500">
-                    <div class="skill-circle">
-                        <svg>
-                            <circle class="bg" cx="60" cy="60" r="56" />
-                            <circle class="progress" cx="60" cy="60" r="56" style="stroke-dashoffset: calc(352 - (352 * 70) / 100);" />
-                        </svg>
-                        <div class="skill-percentage">70%</div>
-                    </div>
-                    <div class="skill-name"><i class="fas fa-database"></i> MySQL & Oracle</div>
                 </div>
                 <div class="personal-skills" data-aos="fade-right" data-aos-delay="600">
                     <h3>Personal Skills</h3>
@@ -371,6 +471,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
@@ -463,22 +564,25 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Animate Circle Progress on View
-        const skillCircles = document.querySelectorAll('#skills .progress');
-        const skillObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.strokeDashoffset = entry.target.getAttribute('style').match(/stroke-dashoffset: (.*);/)[1];
-                }
-            });
-        });
-        skillCircles.forEach(circle => skillObserver.observe(circle));
-
         // Mobile Menu Toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+        });
+
+        // Swiper Slider for Technical Skills
+        const technicalSlider = new Swiper('.technical-slider', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            breakpoints: {
+                640: { slidesPerView: 2 },
+                768: { slidesPerView: 3 },
+                1024: { slidesPerView: 4 },
+                1280: { slidesPerView: 5 }
+            }
         });
     </script>
 </body>
