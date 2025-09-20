@@ -3,165 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Aziman bin Azlan - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>Ahmad Aziman Bin Azlan | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; transition: background-color 0.3s, color 0.3s; }
+        body.light { background-color: #fff; color: #000; }
+        .navbar { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); z-index: 1000; padding: 1rem 0; transition: background 0.3s; }
+        body.light .navbar { background: rgba(255,255,255,0.8); }
+        .navbar.scrolled { background: rgba(0,0,0,0.9); }
+        body.light .navbar.scrolled { background: rgba(255,255,255,0.9); }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 2rem; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #8B5CF6; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: #fff; text-decoration: none; transition: color 0.3s; }
+        body.light .nav-links a { color: #000; }
+        .nav-links a:hover { color: #8B5CF6; }
+        #theme-toggle { background: none; border: none; color: #fff; cursor: pointer; font-size: 1.2rem; }
+        body.light #theme-toggle { color: #000; }
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, #000 0%, #1a0d2e 50%, #16213e 100%); position: relative; overflow: hidden; transition: background 0.3s; }
+        body.light .hero { background: linear-gradient(135deg, #fff 0%, #f0f0f0 50%, #e0e0e0 100%); }
+        #particles-js { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+        #three-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; padding: 0 2rem; }
+        .hero h1 { font-size: 4rem; font-weight: 700; margin-bottom: 1rem; background: linear-gradient(45deg, #8B5CF6, #A78BFA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .glitch { position: relative; }
+        .glitch::before, .glitch::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: inherit; clip: rect(0, 900px, 0, 0); }
+        .glitch::before { left: 2px; text-shadow: -2px 0 red; animation: glitch-anim 2s infinite linear alternate-reverse; }
+        .glitch::after { left: -2px; text-shadow: -2px 0 blue; animation: glitch-anim 2.5s infinite linear alternate-reverse; }
+        @keyframes glitch-anim { 0% { clip: rect(52px, 9999px, 4px, 0); transform: skew(0.5deg); } 5% { clip: rect(33px, 9999px, 29px, 0); transform: skew(0.3deg); } 10% { clip: rect(63px, 9999px, 1px, 0); transform: skew(0.6deg); } 15% { clip: rect(2px, 9999px, 86px, 0); transform: skew(0.1deg); } 20% { clip: rect(62px, 9999px, 50px, 0); transform: skew(0.4deg); } 25% { clip: rect(38px, 9999px, 5px, 0); transform: skew(0.2deg); } 30% { clip: rect(63px, 9999px, 43px, 0); transform: skew(0.1deg); } 35% { clip: rect(96px, 9999px, 36px, 0); transform: skew(0.4deg); } 40% { clip: rect(22px, 9999px, 54px, 0); transform: skew(0.3deg); } 45% { clip: rect(25px, 9999px, 55px, 0); transform: skew(0.7deg); } 50% { clip: rect(49px, 9999px, 18px, 0); transform: skew(0.3deg); } 55% { clip: rect(1px, 9999px, 22px, 0); transform: skew(0.4deg); } 60% { clip: rect(82px, 9999px, 91px, 0); transform: skew(0.2deg); } 65% { clip: rect(13px, 9999px, 88px, 0); transform: skew(0.1deg); } 70% { clip: rect(54px, 9999px, 39px, 0); transform: skew(0.5deg); } 75% { clip: rect(39px, 9999px, 32px, 0); transform: skew(0.5deg); } 80% { clip: rect(100px, 9999px, 58px, 0); transform: skew(0.2deg); } 85% { clip: rect(75px, 9999px, 64px, 0); transform: skew(0.4deg); } 90% { clip: rect(96px, 9999px, 33px, 0); transform: skew(0.6deg); } 95% { clip: rect(66px, 9999px, 27px, 0); transform: skew(0.8deg); } 100% { clip: rect(68px, 9999px, 41px, 0); transform: skew(0.7deg); } }
+        .hero p { font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9; }
+        #typed { border-right: 2px solid #8B5CF6; padding-right: 0.5rem; animation: blink 0.75s step-end infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
+        .profile-img { width: 200px; height: 200px; border-radius: 50%; margin: 2rem auto; border: 4px solid #8B5CF6; object-fit: cover; box-shadow: 0 0 30px rgba(139, 92, 246, 0.5); transition: transform 0.5s; }
+        .profile-img:hover { transform: rotate(360deg); }
+        .btn-hire { background: linear-gradient(45deg, #8B5CF6, #A78BFA); color: #fff; padding: 1rem 2rem; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; display: inline-block; }
+        .btn-hire:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(139, 92, 246, 0.7); }
+        .section { padding: 5rem 0; max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; transition: background 0.3s; }
+        body.light .section.bg-light { background: #f0f0f0; }
+        .section h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; background: linear-gradient(45deg, #8B5CF6, #A78BFA); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .about p { font-size: 1.1rem; line-height: 1.8; text-align: center; max-width: 800px; margin: 0 auto; opacity: 0.9; }
+        .timeline { position: relative; max-width: 1200px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 6px; background: #8B5CF6; top: 0; bottom: 0; left: 50%; margin-left: -3px; }
+        .timeline-item { padding: 10px 40px; position: relative; background: inherit; width: 50%; transition: background 0.3s; }
+        .timeline-item::after { content: ''; position: absolute; width: 25px; height: 25px; right: -17px; background: #fff; border: 4px solid #8B5CF6; top: 15px; border-radius: 50%; z-index: 1; }
+        body.light .timeline-item::after { background: #000; }
+        .left { left: 0; }
+        .right { left: 50%; }
+        .right::after { left: -16px; }
+        .timeline-content { padding: 20px 30px; background: rgba(255,255,255,0.1); position: relative; border-radius: 6px; backdrop-filter: blur(10px); border: 1px solid rgba(139,92,246,0.2); transition: background 0.3s; }
+        body.light .timeline-content { background: rgba(0,0,0,0.1); border-color: rgba(139,92,246,0.5); }
+        /* Updated Skills Section */
+        #skills .skills-container { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 2rem; }
+        #skills .skill-group { text-align: center; }
+        #skills .skill-circle { position: relative; width: 150px; height: 150px; }
+        #skills .skill-circle svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+        #skills .skill-circle circle { fill: none; stroke-width: 10; stroke-linecap: round; transition: stroke-dashoffset 2s ease-in-out; }
+        #skills .skill-circle .bg { stroke: rgba(255,255,255,0.1); }
+        body.light #skills .skill-circle .bg { stroke: rgba(0,0,0,0.1); }
+        #skills .skill-circle .progress { stroke: url(#gradient); stroke-dasharray: 440; stroke-dashoffset: 440; }
+        #skills .skill-percentage { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; font-weight: bold; }
+        #skills .skill-name { margin-top: 1rem; font-size: 1.2rem; }
+        #skills .personal-skills { display: flex; flex-direction: column; gap: 1rem; max-width: 400px; }
+        #skills .personal-skill { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 10px; transition: transform 0.3s; }
+        #skills .personal-skill:hover { transform: scale(1.05); }
+        body.light #skills .personal-skills .personal-skill { background: rgba(0,0,0,0.05); }
+        #skills .languages { margin-top: 2rem; display: flex; gap: 2rem; justify-content: center; }
+        #skills .language { font-size: 1.2rem; padding: 0.5rem 1rem; background: linear-gradient(45deg, #8B5CF6, #A78BFA); border-radius: 20px; color: #fff; }
+        .project-grid { display: flex; flex-direction: row; gap: 2rem; overflow-x: auto; padding: 1rem 0; }
+        .project-card { background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 15px; backdrop-filter: blur(10px); border: 1px solid rgba(139,92,246,0.2); transition: transform 0.3s, background 0.3s; min-width: 300px; }
+        body.light .project-card { background: rgba(0,0,0,0.1); }
+        .project-card:hover { transform: translateY(-10px); }
+        .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+        .contact-item i { color: #8B5CF6; margin-right: 1rem; transition: transform 0.3s; }
+        .contact-item:hover i { transform: rotate(360deg); }
+        .contact-form { max-width: 600px; margin: 0 auto; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; color: #A78BFA; }
+        .form-group input, .form-group textarea { width: 100%; padding: 1rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(139,92,246,0.3); border-radius: 10px; color: #fff; transition: border 0.3s, background 0.3s; }
+        body.light .form-group input, body.light .form-group textarea { background: rgba(0,0,0,0.1); color: #000; }
+        .form-group input:focus, .form-group textarea:focus { border-color: #8B5CF6; }
+        .form-group input::placeholder, .form-group textarea::placeholder { color: #aaa; }
+        .btn-submit { background: linear-gradient(45deg, #8B5CF6, #A78BFA); color: #fff; padding: 1rem 2rem; border: none; border-radius: 10px; cursor: pointer; width: 100%; font-weight: 600; transition: transform 0.3s; }
+        .btn-submit:hover { transform: scale(1.05); }
+        footer { background: rgba(0,0,0,0.5); text-align: center; padding: 2rem; transition: background 0.3s; }
+        body.light footer { background: rgba(255,255,255,0.5); }
+        #back-to-top { position: fixed; bottom: 20px; right: 20px; background: #8B5CF6; color: #fff; border: none; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: opacity 0.3s; }
+        #back-to-top.show { opacity: 1; }
+        .custom-cursor { position: absolute; width: 20px; height: 20px; background: #8B5CF6; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: transform 0.1s; z-index: 9999; }
+        .custom-cursor.hover { transform: scale(2); }
+        @media (max-width: 768px) { 
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::after { left: 15px; }
+            .right { left: 0%; }
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { gap: 1rem; }
+            #skills .skills-container { flex-direction: column; }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Ahmad Aziman bin Azlan</h1>
-            <p>Computer Science Graduate | Web Developer | PHP, Laravel & Machine Learning Enthusiast</p>
-            <p class="intro">Welcome to my Career City! Hover or click on a building to explore my portfolio.</p>
-        </div>
-    </header>
 
-    <section class="cityscape">
-        <div class="cloud" style="--top: 10%; --delay: 10s">☁️</div>
-        <div class="cloud" style="--top: 20%; --delay: 15s">☁️</div>
-        <div class="cloud" style="--top: 15%; --delay: 20s">☁️</div>
-        <div class="building" data-section="about">
-            <span class="building-emoji">🏢</span>
-            <span class="building-name">About Me</span>
-            <span class="tooltip">Click to explore!</span>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Ahmad Aziman Azlan</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-moon"></i></button>
         </div>
-        <div class="building" data-section="skills">
-            <span class="building-emoji">🌆</span>
-            <span class="building-name">Skills</span>
-            <span class="tooltip">Click to explore!</span>
-        </div>
-        <div class="building" data-section="experience">
-            <span class="building-emoji">🏭</span>
-            <span class="building-name">Experience</span>
-            <span class="tooltip">Click to explore!</span>
-        </div>
-        <div class="building" data-section="projects">
-            <span class="building-emoji">🚧</span>
-            <span class="building-name">Projects</span>
-            <span class="tooltip">Click to explore!</span>
-        </div>
-        <div class="building" data-section="education">
-            <span class="building-emoji">🏫</span>
-            <span class="building-name">Education</span>
-            <span class="tooltip">Click to explore!</span>
-        </div>
-        <div class="building" data-section="contact">
-            <span class="building-emoji">🏛️</span>
-            <span class="building-name">Contact</span>
-            <span class="tooltip">Click to explore!</span>
-        </div>
-        <div class="road">
-            <span class="car">🚗</span>
+    </nav>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div id="particles-js"></div>
+        <canvas id="three-canvas"></canvas>
+        <div class="hero-content" data-aos="fade-up">
+            <img src="https://via.placeholder.com/200?text=Profile" alt="Ahmad Aziman Bin Azlan" class="profile-img" data-aos="zoom-in" data-aos-delay="500">
+            <h1 class="glitch" data-text="Ahmad Aziman Bin Azlan" data-aos="fade-down">Ahmad Aziman Bin Azlan</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Hey there! <span id="typed"></span></p>
+            <a href="#contact" class="btn-hire" data-aos="zoom-in" data-aos-delay="400">Get In Touch</a>
         </div>
     </section>
 
-    <!-- Modals for each section -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div id="modal-body"></div>
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container" data-aos="fade-up">
+            <h2 data-aos="fade-right">About Me</h2>
+            <p data-aos="fade-left">Highly motivated and detail-oriented Computer Science graduate with a strong foundation in software development, testing, and problem-solving. Passionate about learning new technologies and improving system security. Skilled in working with various programming languages, frameworks, and databases. Experienced in both development and testing environments, ensuring software reliability and efficiency.</p>
         </div>
-    </div>
+    </section>
 
-    <!-- Hidden content sections (used to populate modals) -->
-    <div id="about-content" class="hidden">
-        <h2>About Me 🏢</h2>
-        <p>I’m a driven Computer Science graduate eager to learn and grow in software development. With hands-on experience in PHP, Laravel, MySQL, and Python, I’ve built web portals, integrated APIs, and created user-friendly documentation for e-learning platforms like IUCeL 2025. My background in field and office settings, including inventory management and process optimization, has honed my problem-solving and collaboration skills.</p>
-        <p>Flexible and detail-oriented, I thrive in team environments and am passionate about boosting productivity through innovative tech solutions. I’m seeking internship or entry-level roles at forward-thinking companies where I can contribute and make an impact.</p>
-    </div>
+    <!-- Experience Section -->
+    <section id="experience" class="section bg-light">
+        <div class="container" data-aos="fade-up">
+            <h2 data-aos="fade-right">Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <h3>Web Development Intern</h3>
+                        <h4>Universiti Teknikal Malaysia Melaka | Mar 2025 - Jun 2025</h4>
+                        <ul>
+                            <li>Developed and maintained features for The International University Carnival on E-Learning (IUCEL) 2025 portal using PHP, Laravel, and MySQL.</li>
+                            <li>Designed and implemented registration, article submission, and payment systems with CAPTCHA, integrating a third-party payment API for secure transaction processing.</li>
+                            <li>Developed and executed test cases, ensuring the software reliability and functionality.</li>
+                            <li>Collaborated with the development team to improve application performance and security.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <h3>Assistant Supervisor</h3>
+                        <h4>Pusat Borong Matahari | April 2020 - Oct 2020</h4>
+                        <ul>
+                            <li>Conducted cost analysis on pricing trends to maximize cost efficiency in procurement decisions.</li>
+                            <li>Analyzed pricing trends to help reduce costs and improve procurement decisions.</li>
+                            <li>Maintained quality standards through inspections of received materials.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <h3>Web Developer Intern</h3>
+                        <h4>Aerodyne Geospatial Sdn Bhd | Jul 2019 - Sep 2019</h4>
+                        <ul>
+                            <li>Utilized Laravel, a PHP framework, to create and implement scalable, maintainable, and user-friendly web application features.</li>
+                            <li>Collaborated with senior developers to design, develop, and deliver web application solutions using the Software Development Life Cycle (SDLC) methodology.</li>
+                            <li>Collected and documented user requirements to ensure alignment with project goals and business needs.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div id="skills-content" class="hidden">
-        <h2>Skills 🌆</h2>
-        <ul>
-            <li>Programming Languages & Frameworks: PHP, Laravel, Python, HTML, CSS, JavaScript</li>
-            <li>Databases & Tools: MySQL, HeidiSQL, phpMyAdmin</li>
-            <li>Development Environments: Visual Studio Code, Laragon, Google Colab</li>
-            <li>Other Technologies: API Integration, DataTables, Select2, Canva, YOLOv8</li>
-            <li>Soft Skills: Problem-Solving, Team Collaboration, Adaptability, Time Management, Data Analysis (Excel), Process Optimization</li>
-            <li>Language Proficiency: Bahasa Malaysia (Native), English (Intermediate)</li>
-        </ul>
-    </div>
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="container" data-aos="fade-up">
+            <h2 data-aos="fade-right">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item left" data-aos="fade-right">
+                    <div class="timeline-content">
+                        <h3>Bachelor of Computer Science with Honours</h3>
+                        <h4>Universiti Teknologi MARA | Oct 2022 - Sep 2025</h4>
+                        <p>Final Year Project: Chili Disease and Pest Detection System.</p>
+                        <p>Relevant coursework in Software Engineering and Image Processing.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right" data-aos="fade-left">
+                    <div class="timeline-content">
+                        <h3>Diploma in Computer Science</h3>
+                        <h4>Universiti Teknologi MARA | Jun 2017 - Feb 2020</h4>
+                        <p>Relevant coursework in Object Oriented Programming and Web Application Development.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div id="experience-content" class="hidden">
-        <h2>Professional Experience 🏭</h2>
-        <div class="exp-item">
-            <h3>Web Development Intern - Centre for Open and Distance Learning (CODL), Universiti Teknikal Malaysia Melaka</h3>
-            <p>March 2025 – June 2025 | Melaka, Malaysia</p>
-            <ul>
-                <li>Developed features for the IUCeL 2025 portal using PHP, Laravel, and MySQL, including role-based access.</li>
-                <li>Implemented registration forms, article submissions, and payment systems with CAPTCHA.</li>
-                <li>Integrated third-party payment API and managed databases via HeidiSQL.</li>
-                <li>Created user manuals with Canva, reducing support queries.</li>
-            </ul>
+    <!-- Projects Section -->
+    <section id="projects" class="section bg-light">
+        <div class="container" data-aos="fade-up">
+            <h2 data-aos="fade-right">Projects</h2>
+            <div class="project-grid">
+                <div class="project-card" data-aos="flip-left">
+                    <h3>Chili Disease and Pest Detection System</h3>
+                    <p>Developed an innovative system using YOLO for real-time detection of diseases and pests in chili plants. Utilized Python, image processing techniques, and machine learning to enhance agricultural efficiency and crop health monitoring.</p>
+                    <p>Technologies: Python, YOLO, OpenCV</p>
+                </div>
+                <div class="project-card" data-aos="flip-right">
+                    <h3>IUCEL 2025 Portal</h3>
+                    <p>Built features for registration, submissions, and payments using PHP, Laravel, MySQL, with CAPTCHA and API integration.</p>
+                    <p>Technologies: PHP, Laravel, MySQL</p>
+                </div>
+            </div>
         </div>
-        <div class="exp-item">
-            <h3>Web Developer Intern - Aerodyne Geospatial Sdn Bhd</h3>
-            <p>July 2019 – September 2019 | Malaysia</p>
-            <ul>
-                <li>Collaborated on scalable web applications using Laravel and SDLC methodologies.</li>
-                <li>Gathered user requirements and optimized code for performance.</li>
-            </ul>
-        </div>
-        <div class="exp-item">
-            <h3>Assistant Supervisor - Pusat Borong Matahari Sdn Bhd</h3>
-            <p>April 2020 – October 2020 | Selangor, Malaysia</p>
-            <ul>
-                <li>Optimized inventory management with data-driven strategies.</li>
-                <li>Conducted cost analysis using Excel and quality control inspections.</li>
-                <li>Improved supply chain collaboration and operational efficiency.</li>
-                <li>Generated performance reports for decision-making.</li>
-            </ul>
-        </div>
-    </div>
+    </section>
 
-    <div id="projects-content" class="hidden">
-        <h2>Projects 🚧</h2>
-        <div class="proj-item">
-            <h3>Chili Disease and Pest Detection System (Final Year Project)</h3>
-            <ul>
-                <li>Developed a Python-based ML system using YOLOv8 on Google Colab.</li>
-                <li>Created a user-friendly dashboard for farmers.</li>
-                <li>Optimized data preprocessing for efficiency.</li>
-            </ul>
-            <!--<a href="#">View on GitHub</a>-->
+    <!-- Skills Section - Enhanced with Circular Progress and Icons -->
+    <section id="skills" class="section">
+        <div class="container" data-aos="fade-up">
+            <h2 data-aos="fade-right">Skills</h2>
+            <div class="skills-container">
+                <div class="skill-group" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="skill-circle">
+                        <svg>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#8B5CF6" />
+                                    <stop offset="100%" stop-color="#A78BFA" />
+                                </linearGradient>
+                            </defs>
+                            <circle class="bg" cx="75" cy="75" r="70" />
+                            <circle class="progress" cx="75" cy="75" r="70" style="stroke-dashoffset: calc(440 - (440 * 90) / 100);" />
+                        </svg>
+                        <div class="skill-percentage">90%</div>
+                    </div>
+                    <div class="skill-name"><i class="fab fa-java"></i> Java</div>
+                </div>
+                <div class="skill-group" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="skill-circle">
+                        <svg>
+                            <circle class="bg" cx="75" cy="75" r="70" />
+                            <circle class="progress" cx="75" cy="75" r="70" style="stroke-dashoffset: calc(440 - (440 * 85) / 100);" />
+                        </svg>
+                        <div class="skill-percentage">85%</div>
+                    </div>
+                    <div class="skill-name"><i class="fab fa-js"></i> JavaScript</div>
+                </div>
+                <div class="skill-group" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="skill-circle">
+                        <svg>
+                            <circle class="bg" cx="75" cy="75" r="70" />
+                            <circle class="progress" cx="75" cy="75" r="70" style="stroke-dashoffset: calc(440 - (440 * 80) / 100);" />
+                        </svg>
+                        <div class="skill-percentage">80%</div>
+                    </div>
+                    <div class="skill-name"><i class="fab fa-python"></i> Python</div>
+                </div>
+                <div class="skill-group" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="skill-circle">
+                        <svg>
+                            <circle class="bg" cx="75" cy="75" r="70" />
+                            <circle class="progress" cx="75" cy="75" r="70" style="stroke-dashoffset: calc(440 - (440 * 75) / 100);" />
+                        </svg>
+                        <div class="skill-percentage">75%</div>
+                    </div>
+                    <div class="skill-name"><i class="fab fa-php"></i> PHP & Laravel</div>
+                </div>
+                <div class="skill-group" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="skill-circle">
+                        <svg>
+                            <circle class="bg" cx="75" cy="75" r="70" />
+                            <circle class="progress" cx="75" cy="75" r="70" style="stroke-dashoffset: calc(440 - (440 * 70) / 100);" />
+                        </svg>
+                        <div class="skill-percentage">70%</div>
+                    </div>
+                    <div class="skill-name"><i class="fas fa-database"></i> MySQL & Oracle</div>
+                </div>
+                <div class="personal-skills" data-aos="fade-right" data-aos-delay="600">
+                    <h3>Personal Skills</h3>
+                    <div class="personal-skill"><i class="fas fa-eye"></i> Detail-oriented</div>
+                    <div class="personal-skill"><i class="fas fa-sync-alt"></i> Highly adaptable in fast-paced environments</div>
+                    <div class="personal-skill"><i class="fas fa-comments"></i> Excellent communication and team collaboration</div>
+                    <div class="personal-skill"><i class="fas fa-brain"></i> Strong critical thinking and problem-solving skills</div>
+                    <div class="languages">
+                        <div class="language">Malay</div>
+                        <div class="language">English</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="proj-item">
-            <h3>IUCeL 2025 Portal Development</h3>
-            <ul>
-                <li>Built a role-based web portal with PHP/Laravel.</li>
-                <li>Integrated APIs and created manuals for categories.</li>
-            </ul>
-            <!--<a href="#">Live Demo</a>-->
-        </div>
-    </div>
+    </section>
 
-    <div id="education-content" class="hidden">
-        <h2>Education 🏫</h2>
-        <div class="edu-item">
-            <h3>Bachelor of Science (Hons.) in Computer Science</h3>
-            <p>Universiti Teknologi MARA, Kampus Jasin | 2022 – 2025</p>
-            <p>Relevant Coursework: Web Development, Database Systems, Software Engineering, Machine Learning</p>
+    <!-- Contact Section -->
+    <section id="contact" class="section bg-light">
+        <div class="container" data-aos="fade-up">
+            <h2 data-aos="fade-right">Contact Me</h2>
+            <div class="contact-info" data-aos="fade-left">
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Shah Alam, Selangor</div>
+                <div class="contact-item"><i class="fas fa-phone"></i> 011-57179984</div>
+                <div class="contact-item"><i class="fas fa-envelope"></i> aziman605@gmail.com</div>
+                <div class="contact-item"><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/ahmad-aziman-azlan" style="color: #8B5CF6;">LinkedIn</a></div>
+            </div>
+            <form class="contact-form" data-aos="zoom-in" data-aos-delay="200">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea placeholder="Your Message" rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
         </div>
-        <div class="edu-item">
-            <h3>Diploma in Computer Science</h3>
-            <p>Universiti Teknologi MARA, Kampus Jasin | 2017 – 2020</p>
-        </div>
-    </div>
+    </section>
 
-    <div id="contact-content" class="hidden">
-        <h2>Contact 🏛️</h2>
-        <p>Email: aziman605@gmail.com</p>
-        <p>Phone: 01157179984</p>
-        <p>LinkedIn: linkedin.com/in/ahmad-aziman-7080b0348</p>
-        <p>Location: Jasin, Melaka</p>
-        <p>Additional: Driving License (B2, D), Own Transport</p>
-    </div>
-
-    <footer>
-        <p>© 2025 Ahmad Aziman bin Azlan. All rights reserved.</p>
+    <!-- Footer -->
+    <footer data-aos="fade-up">
+        <p>&copy; 2025 Ahmad Aziman Bin Azlan. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
-</body>
+    <button id="back-to-top"><i class="fas fa-arrow-up"></i></button>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light');
+            themeToggle.innerHTML = document.body.classList.contains('light') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
+        // Custom Cursor
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = `${e.pageX}px`;
+            cursor.style.top = `${e.pageY}px`;
+        });
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Particles
+        particlesJS('particles-js', {
+            particles: { number: { value: 80, density: { enable: true, value_area: 800 } }, color: { value: '#8B5CF6' }, shape: { type: 'circle' }, opacity: { value: 0.5 }, size: { value: 3, random: true }, line_linked: { enable: true, distance: 150, color: '#A78BFA', opacity: 0.4, width: 1 }, move: { enable: true, speed: 2 } },
+            interactivity: { detect_on: 'canvas', events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' } }, modes: { repulse: { distance: 100 }, push: { particles_nb: 4 } } },
+            retina_detect: true
+        });
+
+        // Three.js
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('three-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+        const material = new THREE.MeshBasicMaterial({ color: 0x8B5CF6, wireframe: true });
+        const torusKnot = new THREE.Mesh(geometry, material);
+        scene.add(torusKnot);
+        camera.position.z = 30;
+        function animate() {
+            requestAnimationFrame(animate);
+            torusKnot.rotation.x += 0.01;
+            torusKnot.rotation.y += 0.01;
+            renderer.render(scene, camera);
+        }
+        animate();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // AOS
+        AOS.init({ duration: 1000, once: true });
+
+        // Typed
+        var typed = new Typed('#typed', {
+            strings: ['Computer Science Graduate', 'Software Developer', 'Web Enthusiast', 'Problem Solver', 'Tech Innovator'],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true
+        });
+
+        // GSAP
+        gsap.from('.hero-content', { duration: 1.5, y: 50, opacity: 0, ease: 'power3.out' });
+        gsap.from('.nav-links li', { duration: 1, stagger: 0.2, y: -20, opacity: 0, delay: 1 });
+
+        // ScrollReveal
+        ScrollReveal().reveal('.section', { delay: 200, distance: '20px', origin: 'bottom', duration: 1000 });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Navbar Scroll
+        window.addEventListener('scroll', () => {
+            document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // Back to Top
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('show', window.scrollY > 300);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Animate Circle Progress on View
+        const skillCircles = document.querySelectorAll('#skills .progress');
+        const skillObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.strokeDashoffset = entry.target.getAttribute('style').match(/stroke-dashoffset: (.*);/)[1];
+                }
+            });
+        });
+        skillCircles.forEach(circle => skillObserver.observe(circle));
+    </script>
+</body>
 </html>
